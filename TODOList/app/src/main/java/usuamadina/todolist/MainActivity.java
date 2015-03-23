@@ -25,7 +25,7 @@ public class MainActivity extends ActionBarActivity {
     private ListView todoListView;
 
     private ArrayList<String> todos;
-    private ArrayAdapter<String> aa;
+    private ArrayAdapter<String> aa; //adapta datos a la vista
 
 
 
