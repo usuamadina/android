@@ -12,7 +12,7 @@
         android:id="@+id/txtMessage"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/sendRequest" />
+        android:layout_toStartOf="@+id/btnSend" />
 
     <Button
         android:layout_width="wrap_content"
@@ -23,12 +23,11 @@
         android:layout_alignParentEnd="true" />
 
     <TextView
-        android:layout_width="@dimen/abc_text_size_title_material"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/lblMessage"
-        android:layout_below="@+id/sendRequest"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/sendRequest" />
+        android:layout_below="@+id/btnSend"
+        android:layout_alignEnd="@+id/btnSend" />
 
     <ImageView
         android:layout_width="fill_parent"
@@ -36,9 +35,9 @@
         android:id="@+id/imgCamera"
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/btnCamera"
-        android:layout_alignEnd="@+id/sendRequest"
         android:layout_above="@+id/btnCamera"
-        android:layout_below="@+id/lblMessage" />
+        android:layout_below="@+id/lblMessage"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -46,6 +45,6 @@
         android:text="Take a Photo"
         android:id="@+id/btnCamera"
         android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/sendRequest"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/btnSend" />
 </RelativeLayout>

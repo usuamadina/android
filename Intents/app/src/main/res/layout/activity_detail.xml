@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SEND"
-        android:id="@+id/sendRequest"
+        android:id="@+id/btnSend"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />
 
@@ -22,16 +22,16 @@
         android:layout_height="wrap_content"
         android:id="@+id/lblMessage"
         android:layout_below="@+id/txtMessage"
-        android:layout_toStartOf="@+id/sendRequest" />
+        android:layout_toStartOf="@+id/btnSend" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="CANCEL"
-        android:id="@+id/cancelRequest"
+        android:id="@+id/btnCancel"
         android:layout_alignParentTop="true"
         android:layout_marginTop="461dp"
-        android:layout_alignEnd="@+id/sendRequest"
+        android:layout_alignEnd="@+id/btnSend"
         android:layout_alignParentStart="true" />
 
 </RelativeLayout>

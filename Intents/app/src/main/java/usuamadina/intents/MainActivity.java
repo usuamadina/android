@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +29,7 @@ public class MainActivity extends ActionBarActivity {
     private ImageView imgCamera;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,29 +47,35 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void addEventsListeners() {
-
-        btnSend.setOnClickListener(new View.OnClickListener()) {
+        btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View v){
+            public void onClick(View v) {
                 String message = txtMessage.getText().toString();
                 if (message.length() > 0) {
                     Intent sendRequest = new Intent(MainActivity.this, Detail_Activity.class);
                     sendRequest.putExtra(MESSAGE, txtMessage.getText().toString());
                     startActivityForResult(sendRequest, REQUEST_TARGET);
+                } else {
+
+                   /*
+                    Toast toast = Toast.makeText(MainActivity.this, getResources().getString(R.string.no_text), Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
+                    toast.show();
+                    */
                 }
-                /*else {
-                    Toast toast = Toast.makeText(MainActivity.this, getResources().getString(R.),)
-                }*/
+
             }
-
-
-        }
+        });
 
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(sendRequest, REQUEST_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+
             }
         });
 
@@ -87,6 +95,8 @@ public class MainActivity extends ActionBarActivity {
                     Bundle extras = data.getExtras();
                     Bitmap imageBitmap = (Bitmap) extras.get("data");
                     imgCamera.setImageBitmap(imageBitmap);
+                    break;
+                default:
                     break;
             }
         }
