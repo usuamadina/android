@@ -13,6 +13,7 @@ import android.widget.TextView;
  */
 public class Detail_Activity extends ActionBarActivity {
 
+
     private Button btnSend;
     private Button btnCamera;
     private EditText txtMessage;
@@ -21,28 +22,29 @@ public class Detail_Activity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        btnSend = (Button)findViewById(R.id.btnSend);
-        btnCamera = (Button)findViewById(R.id.btnCamera);
-        txtMessage = (EditText)findViewById(R.id.txtMessage);
-        lblMessage = (TextView)findViewById(R.id.lblMessage);
+        btnSend = (Button) findViewById(R.id.btnSend);
+        btnCamera = (Button) findViewById(R.id.btnCamera);
+        txtMessage = (EditText) findViewById(R.id.txtMessage);
+        lblMessage = (TextView) findViewById(R.id.lblMessage);
 
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activityTarget);
+        setContentView(R.layout.activity_detail);
 
 
-     processIntent();
+        processIntent();
+
     }
 
-    private void addEventListeners(){
-        btnSend.setOnClickListener(new View.OnClickListener()){
+    private void addEventListeners() {
+        btnSend.setOnClickListener(new View.OnClickListener()) {
             @Override
-            public void onClick(View v){
+            public void onClick (View v){
                 String message = txtMessage.getText().toString();
-                if(message.length()>0){
+                if (message.length() > 0) {
                     Intent data = new Intent(MainActivity.this, Detail_Activity.class);
                     data.putExtra(MESSAGE, txtMessage.getText().toString());
-                    setResult(RESULT_OK,data);
+                    setResult(RESULT_OK, data);
                     finish();
                 }
                 /*else {
@@ -51,12 +53,11 @@ public class Detail_Activity extends ActionBarActivity {
             }
 
 
+        }
 
-    }
-
-    private void processIntent(){
+    private void processIntent() {
         Intent data = getIntent();
         String message = data.getStringExtra(MainActivity.MESSAGE);
-        lblMessage.setText(MESSAGE);
+        lblMessage.setText(message);
     }
 }

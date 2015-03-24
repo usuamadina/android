@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
 
-    private static final String MESSAGE = "MESSAGE";
+    static final String MESSAGE = "MESSAGE";
     private static final int REQUEST_TARGET = 1;
     private final int REQUEST_IMAGE_CAPTURE = 2;
 
@@ -67,7 +67,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(sendRequest, REQUEST_IMAGE_CAPTURE));
+                startActivityForResult(sendRequest, REQUEST_IMAGE_CAPTURE);
             }
         });
 
@@ -85,7 +85,7 @@ public class MainActivity extends ActionBarActivity {
                     break;
                 case REQUEST_IMAGE_CAPTURE:
                     Bundle extras = data.getExtras();
-                    Bitmap imageBitmap = (Bitmap)extras.get("data");
+                    Bitmap imageBitmap = (Bitmap) extras.get("data");
                     imgCamera.setImageBitmap(imageBitmap);
                     break;
             }

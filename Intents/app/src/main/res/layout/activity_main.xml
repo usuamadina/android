@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SEND"
-        android:id="@+id/sendRequest"
+        android:id="@+id/btnSend"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />
 
@@ -35,7 +35,7 @@
         android:layout_height="fill_parent"
         android:id="@+id/imgCamera"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@id/btnCamera"
+        android:layout_toStartOf="@+id/btnCamera"
         android:layout_alignEnd="@+id/sendRequest"
         android:layout_above="@+id/btnCamera"
         android:layout_below="@+id/lblMessage" />
