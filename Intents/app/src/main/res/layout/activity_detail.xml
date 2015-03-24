@@ -1,0 +1,37 @@
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout">
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtMessage" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SEND"
+        android:id="@+id/sendRequest"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lblMessage"
+        android:layout_below="@+id/txtMessage"
+        android:layout_toStartOf="@+id/sendRequest" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CANCEL"
+        android:id="@+id/cancelRequest"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="461dp"
+        android:layout_alignEnd="@+id/sendRequest"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
