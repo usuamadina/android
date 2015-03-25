@@ -14,5 +14,6 @@ public class TelephonyReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.d(RECEIVER, "ConectionReceiver onReceive");
         Log.d(RECEIVER, "ACTION: " + intent.getAction());
+
     }
 }
