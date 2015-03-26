@@ -1,9 +1,11 @@
-package usuamadina.earthquakes;
+package usuamadina.earthquakes.activities;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import usuamadina.earthquakes.R;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -14,11 +16,6 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
     }
-
-
-
-
-
 
 
     @Override

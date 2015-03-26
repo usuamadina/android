@@ -1,46 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
-
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:descendantFocusability="blocksDescendants">
+    <!--android si detecta que hay un elemento que puede perder el foco, lo bloquea y por eso no funcionaba el detalle de la vista
+     con el descendantFocusability="blockDescendants" se soluciona, ni idea de porque pasa esto porque
+     no debería con un elemento como un textView, pero..-->
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/txtId"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:id="@+id/txtMagnitude"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text=""
         android:textColor="@android:color/holo_blue_dark"
-        android:textSize="@dimen/abc_text_size_display_3_material"
         android:textIsSelectable="true"
-        android:layout_toStartOf="@+id/txtCoordinates"
-        android:text="" />
+        android:textSize="@dimen/abc_text_size_display_1_material" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
         android:id="@+id/txtCoordinates"
-        android:textSize="@dimen/abc_text_size_display_1_material"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/txtPlace"
-        android:layout_centerHorizontal="true"
-        android:textIsSelectable="false" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/txtPlace"
         android:text=""
-        android:id="@+id/txtPlace"
-        android:textSize="@dimen/abc_text_size_display_1_material"
-        android:layout_above="@+id/txtDate"
-        android:layout_toEndOf="@+id/txtMagnitude" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:id="@+id/txtDate"
-        android:textSize="@dimen/abc_text_size_display_1_material"
         android:textIsSelectable="false"
-        android:layout_alignBottom="@+id/txtMagnitude"
-        android:layout_toEndOf="@+id/txtMagnitude" />
+        android:textSize="@dimen/abc_text_size_body_1_material" />
+
+    <TextView
+        android:id="@+id/txtPlace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtDate"
+        android:layout_toEndOf="@+id/txtId"
+        android:text=""
+        android:textSize="@dimen/abc_text_size_body_1_material" />
+
+    <TextView
+        android:id="@+id/txtDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/txtId"
+        android:layout_toEndOf="@+id/txtId"
+        android:text=""
+        android:textIsSelectable="false"
+        android:textSize="@dimen/abc_text_size_body_1_material" />
 
 </RelativeLayout>

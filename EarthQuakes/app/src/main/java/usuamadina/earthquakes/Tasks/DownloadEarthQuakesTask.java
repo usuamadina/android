@@ -1,7 +1,6 @@
 package usuamadina.earthquakes.Tasks;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,45 +14,41 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-import usuamadina.earthquakes.EarthQuake;
-import usuamadina.earthquakes.R;
+import usuamadina.earthquakes.model.EarthQuake;
 import usuamadina.earthquakes.model.Coordinate;
 
 /**
  * Created by cursomovil on 25/03/15.
  */
-public class DownloadEarthQuakesTask extends AsyncTask<String,EarthQuake,Integer> {
+public class DownloadEarthQuakesTask extends AsyncTask<String, EarthQuake, Integer> {
 
 
     // De esta forma obligamos a quien quiera usar el AsynTask a ejecutar el método AddEarthQuakeInterface exigiéndole
     //que nos pase algo de tipo AddEarthQuakeInterface y que implemente el método addEarthQuake
 
-    public interface AddEarthQuakeInterface{
-        public void addEarthQuake(EarthQuake earthQuake);
-    }
-
     private final String EARTHQUAKE = "EARTHQUAKE";
-
     //Una interfaz es un tipo de datos, así que nos vale para declarar una variable con ese tipo de datos
     private AddEarthQuakeInterface target;
 
-
     //No podemos poner un tipo de datos concreto porque no sabemos quien va a llamar a este método, pero si sabemos que va a
     //ejecutar este método
-    public DownloadEarthQuakesTask(AddEarthQuakeInterface target){
+    public DownloadEarthQuakesTask(AddEarthQuakeInterface target) {
         this.target = target;
+
+
+
 
     }
 
-
     @Override
     protected Integer doInBackground(String... urls) {
-        if(urls.length>0){
-            updateEarthQuakes(urls[0]);
+        int count = 0;
+
+        if (urls.length > 0) {
+            count= updateEarthQuakes(urls[0]);
         }
 
-
-        return null;
+        return count;
     }
 
     @Override
@@ -61,11 +56,23 @@ public class DownloadEarthQuakesTask extends AsyncTask<String,EarthQuake,Integer
         super.onProgressUpdate(earthQuakes);
 
         target.addEarthQuake(earthQuakes[0]);
+
     }
 
-    private void updateEarthQuakes(String earthquakesFeed) {
+    @Override
+    protected void onPostExecute(Integer count) {
+        super.onPostExecute(count);
+
+        target.notifyTotal(count);
+
+
+
+    }
+
+    private int updateEarthQuakes(String earthquakesFeed) {
 
         JSONObject json;
+        int count =0;
 
         try {
             URL url = new URL(earthquakesFeed);
@@ -86,11 +93,11 @@ public class DownloadEarthQuakesTask extends AsyncTask<String,EarthQuake,Integer
 
                 json = new JSONObject(responseStrBuilder.toString());
                 JSONArray earthquakes = json.getJSONArray("features");
+                count = earthquakes.length();
 
                 for (int i = earthquakes.length() - 1; i >= 0; i--) {
                     processEarthQuakeTask(earthquakes.getJSONObject(i));
                 }
-
 
             }
         } catch (MalformedURLException e) {
@@ -100,6 +107,7 @@ public class DownloadEarthQuakesTask extends AsyncTask<String,EarthQuake,Integer
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return count;
     }
 
     private void processEarthQuakeTask(JSONObject jsonObject) {
@@ -116,7 +124,7 @@ public class DownloadEarthQuakesTask extends AsyncTask<String,EarthQuake,Integer
             earthQuake.setPlace(properties.getString("place"));
             earthQuake.setMagnitude(properties.getDouble("mag"));
             earthQuake.setCoords(coords);
-            earthQuake.setDate(properties.getInt("time"));
+            earthQuake.setDate(properties.getLong("time"));
             earthQuake.setUrl(properties.getString("url"));
 
             // Aquí ya tenemos por lo menos un terremoto, llamamos a onProgressUpdate mediante la llamada publishProgress(earthQuake)
@@ -132,6 +140,12 @@ public class DownloadEarthQuakesTask extends AsyncTask<String,EarthQuake,Integer
 
 
         }
+    }
+
+    public interface AddEarthQuakeInterface {
+        public void addEarthQuake(EarthQuake earthQuake);
+
+        public void notifyTotal(int total);
     }
 
 

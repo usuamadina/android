@@ -1,4 +1,4 @@
-package usuamadina.earthquakes;
+package usuamadina.earthquakes.model;
 
 import java.util.Date;
 
@@ -21,6 +21,17 @@ public class EarthQuake {
 
     private String url;
 
+    public EarthQuake(String _id, String place, Date date, Coordinate coords, double magnitude) {
+        this._id = _id;
+        this.place = place;
+        this.time = date;
+        this.coords = coords;
+        this.magnitude = magnitude;
+    }
+
+    public EarthQuake() {
+    }
+
     public String getUrl() {
         return url;
     }
@@ -35,17 +46,6 @@ public class EarthQuake {
 
     public void setTime(Date time) {
         this.time = time;
-    }
-
-    public EarthQuake(String _id, String place, Date date, Coordinate coords, double magnitude) {
-        this._id = _id;
-        this.place = place;
-        this.time = date;
-        this.coords = coords;
-        this.magnitude = magnitude;
-    }
-
-    public EarthQuake() {
     }
 
     @Override
@@ -74,13 +74,13 @@ public class EarthQuake {
         return time;
     }
 
-    public void setDate(Date date) {
-        this.time = date;
-    }
-
-    public void setDate(int date) {
+    public void setDate(long date) {
         this.time = new Date(date);
 
+    }
+
+    public void setDate(Date date) {
+        this.time = date;
     }
 
     public Coordinate getCoords() {

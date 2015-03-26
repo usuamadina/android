@@ -18,20 +18,20 @@ public class Coordinate {
         return lat;
     }
 
-    public double getLng() {
-        return lng;
-    }
-
-    public double getDepth() {
-        return depth;
-    }
-
     public void setLat(double lat) {
         this.lat = lat;
     }
 
+    public double getLng() {
+        return lng;
+    }
+
     public void setLng(double lng) {
         this.lng = lng;
+    }
+
+    public double getDepth() {
+        return depth;
     }
 
     public void setDepth(double depth) {
