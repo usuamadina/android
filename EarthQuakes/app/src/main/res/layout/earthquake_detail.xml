@@ -5,24 +5,42 @@
     android:weightSum="1">
 
     <TextView
-        android:layout_width="58dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txtMagnitude"
-        android:layout_alignParentStart="false" />
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="@dimen/abc_text_size_display_3_material"
+        android:textIsSelectable="true"
+        android:layout_toStartOf="@+id/txtCoordinates"
+        android:text="" />
 
     <TextView
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text=""
         android:id="@+id/txtCoordinates"
-        android:layout_alignParentTop="true"
+        android:textSize="@dimen/abc_text_size_display_1_material"
+        android:layout_above="@+id/txtPlace"
+        android:layout_centerHorizontal="true"
+        android:textIsSelectable="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/txtPlace"
+        android:textSize="@dimen/abc_text_size_display_1_material"
+        android:layout_above="@+id/txtDate"
         android:layout_toEndOf="@+id/txtMagnitude" />
 
     <TextView
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtPlace"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/txtCoordinates"
-        android:layout_alignBottom="@+id/txtCoordinates" />
+        android:text=""
+        android:id="@+id/txtDate"
+        android:textSize="@dimen/abc_text_size_display_1_material"
+        android:textIsSelectable="false"
+        android:layout_alignBottom="@+id/txtMagnitude"
+        android:layout_toEndOf="@+id/txtMagnitude" />
 
 </RelativeLayout>
