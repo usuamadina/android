@@ -1,5 +1,6 @@
 package usuamadina.earthquakes.activities;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,6 +10,8 @@ import usuamadina.earthquakes.R;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    private final int PREFS_ACTIVITY = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,12 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -34,9 +43,17 @@ public class MainActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent prefsIntent = new Intent(this, SettingsActivity.class);
+            startActivityForResult(prefsIntent,PREFS_ACTIVITY);
+
+
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+
+
     }
+
+
 }

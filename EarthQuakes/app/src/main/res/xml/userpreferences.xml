@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/UPDATE">
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/PREF_AUTO_UPDATE"
+            android:summary="@string/auto_update_desc"
+            android:title="@string/auto_update_prompt">
+        </SwitchPreference>
+
+        <ListPreference
+            android:defaultValue="5"
+            android:dependency="@string/PREF_AUTO_UPDATE"
+            android:entries="@array/update_freq_entries"
+            android:entryValues="@array/update_freq_values"
+            android:key="@string/PREF_UPDATE_INTERVAL"
+            android:summary=""
+            android:title="">
+        </ListPreference>
+
+        </PreferenceCategory>
+
+
+
+   <ListPreference
+        android:defaultValue="5"
+        android:dependency="@string/PREF_AUTO_UPDATE"
+        android:entries="@array/update_freq_entries"
+        android:entryValues="@array/update_freq_values"
+        android:key="@string/PREF_MIN_MAG"
+        android:summary=""
+        android:title="">
+    </PreferenceCategory>
+
+</PreferenceScreen>

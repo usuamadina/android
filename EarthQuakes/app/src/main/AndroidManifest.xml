@@ -28,6 +28,9 @@
                 android:value="usuamadina.earthquakes.activities.MainActivity" />
 
         </activity>
+        <activity android:name=".activities.SettingsActivity"
+                  android:label="@string/little_activity_settings">
+        </activity>
     </application>
 
 </manifest>
