@@ -5,7 +5,7 @@
         <SwitchPreference
             android:defaultValue="true"
             android:key="@string/PREF_AUTO_UPDATE"
-            android:summary="@string/auto_update_desc"
+            android:summary="Update earthquakes automatically or not"
             android:title="@string/auto_update_prompt">
         </SwitchPreference>
 
@@ -15,39 +15,26 @@
             android:entries="@array/update_freq_entries"
             android:entryValues="@array/update_freq_values"
             android:key="@string/PREF_UPDATE_INTERVAL"
-            android:summary=""
-            android:title="">
+            android:summary="Frecuency at wich to refresh earthquake list"
+            android:title="Update Frecuency">
         </ListPreference>
 
     </PreferenceCategory>
-
-<<<<<<< HEAD
 
     <PreferenceCategory
         android:title="@string/earthquake_filters">
         <ListPreference
             android:defaultValue="5"
             android:dependency="@string/PREF_AUTO_UPDATE"
-            android:entries="@array/update_freq_entries"
-            android:entryValues="@array/update_freq_values"
+            android:entries="@array/magnitude"
+            android:entryValues="@array/magnitude_options"
             android:key="@string/PREF_MIN_MAG"
-            android:summary=""
-            android:title="">
+            android:summary="Select the minimum magnitude earthquake to report"
+            android:title="Minimum Quake Magnitude">
         </ListPreference>
     </PreferenceCategory>
-=======
-   <PreferenceCategory
-       android:title="@string/earthquake_filters">
-    <ListPreference
-        android:defaultValue="5"
-        android:dependency="@string/PREF_AUTO_UPDATE"
-        android:entries="@array/update_freq_entries"
-        android:entryValues="@array/update_freq_values"
-        android:key="@string/PREF_MIN_MAG"
-        android:summary=""
-        android:title="">
-      </ListPreference>
-   </PreferenceCategory>
->>>>>>> e58ca3eabf18900d10a1ce47cf17bae34171ac73
+
+
+
 
 </PreferenceScreen>

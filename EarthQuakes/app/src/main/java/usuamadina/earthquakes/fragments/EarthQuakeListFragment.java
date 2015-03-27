@@ -1,8 +1,11 @@
 package usuamadina.earthquakes.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.ListFragment;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +32,14 @@ public class EarthQuakeListFragment extends ListFragment implements DownloadEart
 
     private ArrayAdapter<EarthQuake> aa;
 
+    private SharedPreferences prefs;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        downloadEarthQuakes();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,9 +47,11 @@ public class EarthQuakeListFragment extends ListFragment implements DownloadEart
 
         earthQuakes = new ArrayList<>();
 
+        // Obtenemos las preferencias
 
-        DownloadEarthQuakesTask task = new DownloadEarthQuakesTask(this);
-        task.execute(getString(R.string.earthquakes_url)); // crea un nuevo thread y ejecuta el método doInBackground dentro del thread
+        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+
 
     }
 
@@ -56,15 +69,26 @@ public class EarthQuakeListFragment extends ListFragment implements DownloadEart
 
     @Override
     public void addEarthQuake(EarthQuake earthQuake) {
-        earthQuakes.add(0, earthQuake);
-        aa.notifyDataSetChanged();
 
+        double MinMagnitude = Double.parseDouble(prefs.getString(getString(R.string.PREF_MIN_MAG), "0"));
+
+        if (earthQuake.getMagnitude() >= MinMagnitude) {
+            earthQuakes.add(0, earthQuake);
+            aa.notifyDataSetChanged();
+        }
+
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @Override
     public void notifyTotal(int total) {
         String msg = getString(R.string.num_earthquakes, total);
-        Toast t = Toast.makeText(getActivity(),msg,Toast.LENGTH_SHORT);
+        Toast t = Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT);
         t.show();
     }
 
@@ -82,6 +106,13 @@ public class EarthQuakeListFragment extends ListFragment implements DownloadEart
         detailIntent.putExtra(EARTHQUAKE_ID, earthQuake.getId());
         startActivity(detailIntent);
 
+
+    }
+
+    private void downloadEarthQuakes() {
+
+        DownloadEarthQuakesTask task = new DownloadEarthQuakesTask(this);
+        task.execute(getString(R.string.earthquakes_url)); // crea un nuevo thread y ejecuta el método doInBackground dentro del thread
 
     }
 
