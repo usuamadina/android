@@ -1,5 +1,6 @@
 package usuamadina.earthquakes.Tasks;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import org.json.JSONArray;
@@ -14,6 +15,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import usuamadina.earthquakes.database.EarthQuakeDB;
 import usuamadina.earthquakes.model.EarthQuake;
 import usuamadina.earthquakes.model.Coordinate;
 
@@ -21,6 +23,8 @@ import usuamadina.earthquakes.model.Coordinate;
  * Created by cursomovil on 25/03/15.
  */
 public class DownloadEarthQuakesTask extends AsyncTask<String, EarthQuake, Integer> {
+
+    private EarthQuakeDB earthQuakeDB;
 
 
     // De esta forma obligamos a quien quiera usar el AsynTask a ejecutar el método AddEarthQuakeInterface exigiéndole
@@ -32,11 +36,11 @@ public class DownloadEarthQuakesTask extends AsyncTask<String, EarthQuake, Integ
 
     //No podemos poner un tipo de datos concreto porque no sabemos quien va a llamar a este método, pero si sabemos que va a
     //ejecutar este método
-    public DownloadEarthQuakesTask(AddEarthQuakeInterface target) {
+    public DownloadEarthQuakesTask(Context context, AddEarthQuakeInterface target) {
+
         this.target = target;
 
-
-
+        earthQuakeDB = new EarthQuakeDB(context);
 
     }
 
@@ -55,7 +59,7 @@ public class DownloadEarthQuakesTask extends AsyncTask<String, EarthQuake, Integ
     protected void onProgressUpdate(EarthQuake... earthQuakes) {
         super.onProgressUpdate(earthQuakes);
 
-        target.addEarthQuake(earthQuakes[0]);
+
 
     }
 
@@ -143,7 +147,6 @@ public class DownloadEarthQuakesTask extends AsyncTask<String, EarthQuake, Integ
     }
 
     public interface AddEarthQuakeInterface {
-        public void addEarthQuake(EarthQuake earthQuake);
 
         public void notifyTotal(int total);
     }

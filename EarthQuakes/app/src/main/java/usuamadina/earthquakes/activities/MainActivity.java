@@ -7,9 +7,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import usuamadina.earthquakes.R;
+import usuamadina.earthquakes.Tasks.DownloadEarthQuakesTask;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements DownloadEarthQuakesTask.AddEarthQuakeInterface{
 
     private final int PREFS_ACTIVITY = 1;
 
@@ -17,6 +18,8 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        downloadEarthQuakes();
 
     }
 
@@ -55,5 +58,15 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    private void downloadEarthQuakes() {
 
+        DownloadEarthQuakesTask task = new DownloadEarthQuakesTask(this,this); // De esta forma le pasamos el contexto
+        task.execute(getString(R.string.earthquakes_url)); //crea un nuevo thread y ejecuta el método doInBackground dentro del thread
+
+    }
+
+    @Override
+    public void notifyTotal(int total) {
+
+    }
 }

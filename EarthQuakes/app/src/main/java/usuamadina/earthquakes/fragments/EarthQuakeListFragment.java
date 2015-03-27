@@ -34,12 +34,6 @@ public class EarthQuakeListFragment extends ListFragment implements DownloadEart
 
     private SharedPreferences prefs;
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        downloadEarthQuakes();
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,18 +61,6 @@ public class EarthQuakeListFragment extends ListFragment implements DownloadEart
     }
 
 
-    @Override
-    public void addEarthQuake(EarthQuake earthQuake) {
-
-        double MinMagnitude = Double.parseDouble(prefs.getString(getString(R.string.PREF_MIN_MAG), "0"));
-
-        if (earthQuake.getMagnitude() >= MinMagnitude) {
-            earthQuakes.add(0, earthQuake);
-            aa.notifyDataSetChanged();
-        }
-
-
-    }
 
     @Override
     public void onResume() {
@@ -109,12 +91,7 @@ public class EarthQuakeListFragment extends ListFragment implements DownloadEart
 
     }
 
-    private void downloadEarthQuakes() {
 
-        DownloadEarthQuakesTask task = new DownloadEarthQuakesTask(this);
-        task.execute(getString(R.string.earthquakes_url)); // crea un nuevo thread y ejecuta el método doInBackground dentro del thread
-
-    }
 
 }
 
