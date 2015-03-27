@@ -46,7 +46,7 @@ public class EarthQuakeAdapter extends ArrayAdapter<EarthQuake> {
 
         EarthQuake item = getItem(position);
         TextView txtMagnitude = (TextView) layout.findViewById(R.id.txtId);
-        TextView txtCoordinates = (TextView) layout.findViewById(R.id.txtCoordinates);
+        //TextView txtCoordinates = (TextView) layout.findViewById(R.id.txtCoordinates);
         TextView txtPlace = (TextView) layout.findViewById(R.id.txtPlace);
         TextView txtDate = (TextView) layout.findViewById(R.id.txtDate);
 

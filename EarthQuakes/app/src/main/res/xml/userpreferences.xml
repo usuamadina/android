@@ -21,6 +21,7 @@
 
     </PreferenceCategory>
 
+<<<<<<< HEAD
 
     <PreferenceCategory
         android:title="@string/earthquake_filters">
@@ -34,5 +35,19 @@
             android:title="">
         </ListPreference>
     </PreferenceCategory>
+=======
+   <PreferenceCategory
+       android:title="@string/earthquake_filters">
+    <ListPreference
+        android:defaultValue="5"
+        android:dependency="@string/PREF_AUTO_UPDATE"
+        android:entries="@array/update_freq_entries"
+        android:entryValues="@array/update_freq_values"
+        android:key="@string/PREF_MIN_MAG"
+        android:summary=""
+        android:title="">
+      </ListPreference>
+   </PreferenceCategory>
+>>>>>>> e58ca3eabf18900d10a1ce47cf17bae34171ac73
 
 </PreferenceScreen>
