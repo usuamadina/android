@@ -6,8 +6,8 @@
     <string name="earthquakes_url">http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson</string>
     <string name="num_earthquakes">%d earthquakes processed</string>
     <string name="little_activity_settings">settings</string>
-    <string name="earthquake_refresh">earthquake refresh</string>
-    <string name="earthquake_filters">earthquake filters</string>
+    <string name="earthquake_refresh">Refresh</string>  
+    <string name="earthquake_filters">Filters</string>
     <string name="PREF_AUTO_UPDATE">PREF_AUTO_UPDATE</string>
     <string name="auto_update_prompt">auto_update_prompt</string>
     <string name="auto_update_desc">auto_update_desc</string>
