@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import usuamadina.earthquakes.activities.detail_activity;
 import usuamadina.earthquakes.database.EarthQuakeDB;
@@ -48,7 +49,7 @@ public class EarthQuakeListFragment extends ListFragment implements DownloadEart
         earthQuakeDB = new EarthQuakeDB(getActivity());
         earthQuakes = new ArrayList<>();
 
-        int minMag = Integer.getInteger()
+        int minMag = Integer.getInteger();
 
 
         // Obtenemos las preferencias
