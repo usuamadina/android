@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import usuamadina.earthquakes.activities.detail_activity;
+import usuamadina.earthquakes.database.EarthQuakeDB;
 import usuamadina.earthquakes.model.EarthQuake;
 import usuamadina.earthquakes.EarthQuakeAdapter.EarthQuakeAdapter;
 import usuamadina.earthquakes.R;
@@ -33,17 +34,33 @@ public class EarthQuakeListFragment extends ListFragment implements DownloadEart
     private ArrayAdapter<EarthQuake> aa;
 
     private SharedPreferences prefs;
+    private EarthQuakeDB earthQuakeDB;
+
+    private List<EarthQuake> earthQuakes;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+        earthQuakeDB = new EarthQuakeDB(getActivity());
         earthQuakes = new ArrayList<>();
+
+        int minMag = Integer.getInteger()
+
 
         // Obtenemos las preferencias
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+
+        int i;
+
+        for (i=0; i<earthQuakes.size(); i++){
+
+
+        }
 
 
 

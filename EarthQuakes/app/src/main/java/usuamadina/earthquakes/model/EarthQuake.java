@@ -99,4 +99,6 @@ public class EarthQuake {
         this.magnitude = magnitude;
     }
 
+    public void insertEarthQuake(EarthQuake earthQuake) {
+    }
 }

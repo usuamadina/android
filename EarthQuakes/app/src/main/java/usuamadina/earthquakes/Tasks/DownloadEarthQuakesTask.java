@@ -1,6 +1,9 @@
 package usuamadina.earthquakes.Tasks;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 
 import org.json.JSONArray;
@@ -10,6 +13,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -25,6 +29,10 @@ import usuamadina.earthquakes.model.Coordinate;
 public class DownloadEarthQuakesTask extends AsyncTask<String, EarthQuake, Integer> {
 
     private EarthQuakeDB earthQuakeDB;
+    private Cursor cursor;
+    private ContentValues newValues = new ContentValues();
+    private String [] resultColumns;
+
 
 
     // De esta forma obligamos a quien quiera usar el AsynTask a ejecutar el método AddEarthQuakeInterface exigiéndole
@@ -36,6 +44,7 @@ public class DownloadEarthQuakesTask extends AsyncTask<String, EarthQuake, Integ
 
     //No podemos poner un tipo de datos concreto porque no sabemos quien va a llamar a este método, pero si sabemos que va a
     //ejecutar este método
+
     public DownloadEarthQuakesTask(Context context, AddEarthQuakeInterface target) {
 
         this.target = target;
@@ -131,12 +140,19 @@ public class DownloadEarthQuakesTask extends AsyncTask<String, EarthQuake, Integ
             earthQuake.setDate(properties.getLong("time"));
             earthQuake.setUrl(properties.getString("url"));
 
+
+
+
+
+
+
             // Aquí ya tenemos por lo menos un terremoto, llamamos a onProgressUpdate mediante la llamada publishProgress(earthQuake)
 
             //mediante el método de Android publishProgress() hace su proceso interno, llama al onProgressUpdate
             // y de esta forma nos comunicamos con la vista devolviéndole el terremoto a quien nos lo ha pedido, el target
-            publishProgress(earthQuake);
 
+
+        earthQuake.insertEarthQuake(earthQuake);
 
         } catch (JSONException e) {
 
@@ -145,6 +161,8 @@ public class DownloadEarthQuakesTask extends AsyncTask<String, EarthQuake, Integ
 
         }
     }
+
+
 
     public interface AddEarthQuakeInterface {
 
