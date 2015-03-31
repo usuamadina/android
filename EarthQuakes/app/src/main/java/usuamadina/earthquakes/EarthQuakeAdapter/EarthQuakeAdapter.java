@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -51,8 +52,9 @@ public class EarthQuakeAdapter extends ArrayAdapter<EarthQuake> {
         TextView txtDate = (TextView) layout.findViewById(R.id.txtDate);
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        DecimalFormat df = new DecimalFormat("0.00");
 
-        txtMagnitude.setText(String.valueOf(item.getMagnitude()));
+        txtMagnitude.setText(df.format(item.getMagnitude()));
         //txtCoordinates.setText((CharSequence) item.getCoords());
         txtDate.setText(sdf.format(item.getDate()));
         txtPlace.setText(item.getPlace());

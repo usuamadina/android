@@ -31,8 +31,7 @@ public class DownloadEarthQuakesTask extends AsyncTask<String, EarthQuake, Integ
     private EarthQuakeDB earthQuakeDB;
     private Cursor cursor;
     private ContentValues newValues = new ContentValues();
-    private String [] resultColumns;
-
+    private String[] resultColumns;
 
 
     // De esta forma obligamos a quien quiera usar el AsynTask a ejecutar el método AddEarthQuakeInterface exigiéndole
@@ -58,7 +57,7 @@ public class DownloadEarthQuakesTask extends AsyncTask<String, EarthQuake, Integ
         int count = 0;
 
         if (urls.length > 0) {
-            count= updateEarthQuakes(urls[0]);
+            count = updateEarthQuakes(urls[0]);
         }
 
         return count;
@@ -67,7 +66,6 @@ public class DownloadEarthQuakesTask extends AsyncTask<String, EarthQuake, Integ
     @Override
     protected void onProgressUpdate(EarthQuake... earthQuakes) {
         super.onProgressUpdate(earthQuakes);
-
 
 
     }
@@ -79,13 +77,12 @@ public class DownloadEarthQuakesTask extends AsyncTask<String, EarthQuake, Integ
         target.notifyTotal(count);
 
 
-
     }
 
     private int updateEarthQuakes(String earthquakesFeed) {
 
         JSONObject json;
-        int count =0;
+        int count = 0;
 
         try {
             URL url = new URL(earthquakesFeed);
@@ -141,18 +138,13 @@ public class DownloadEarthQuakesTask extends AsyncTask<String, EarthQuake, Integ
             earthQuake.setUrl(properties.getString("url"));
 
 
-
-
-
-
-
             // Aquí ya tenemos por lo menos un terremoto, llamamos a onProgressUpdate mediante la llamada publishProgress(earthQuake)
 
             //mediante el método de Android publishProgress() hace su proceso interno, llama al onProgressUpdate
             // y de esta forma nos comunicamos con la vista devolviéndole el terremoto a quien nos lo ha pedido, el target
 
 
-        earthQuake.insertEarthQuake(earthQuake);
+            earthQuakeDB.insertEarthQuake(earthQuake);
 
         } catch (JSONException e) {
 
@@ -161,7 +153,6 @@ public class DownloadEarthQuakesTask extends AsyncTask<String, EarthQuake, Integ
 
         }
     }
-
 
 
     public interface AddEarthQuakeInterface {

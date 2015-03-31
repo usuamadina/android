@@ -28,9 +28,10 @@ import usuamadina.earthquakes.Tasks.DownloadEarthQuakesTask;
 //pero necesitamos implementar el método addEarthQuakeInterface
 
 public class EarthQuakeListFragment extends ListFragment implements DownloadEarthQuakesTask.AddEarthQuakeInterface {
+
     public static final String EARTHQUAKE_ID = "ID";
     private static final String EARTHQUAKE = "EARTHQUAKE";
-    private ArrayList<EarthQuake> earthQuakes;
+   // private ArrayList<EarthQuake> earthQuakes;
 
     private ArrayAdapter<EarthQuake> aa;
 
@@ -48,23 +49,6 @@ public class EarthQuakeListFragment extends ListFragment implements DownloadEart
 
         earthQuakeDB = new EarthQuakeDB(getActivity());
         earthQuakes = new ArrayList<>();
-
-        int minMag = Integer.getInteger();
-
-
-        // Obtenemos las preferencias
-
-
-
-        int i;
-
-        for (i=0; i<earthQuakes.size(); i++){
-
-
-        }
-
-
-
     }
 
     @Override
@@ -72,6 +56,8 @@ public class EarthQuakeListFragment extends ListFragment implements DownloadEart
         View layout = super.onCreateView(inflater, container, savedInstanceState);
 
         aa = new EarthQuakeAdapter(getActivity(), R.layout.earthquake_detail, earthQuakes);
+
+
 
         setListAdapter(aa);
 
@@ -83,6 +69,20 @@ public class EarthQuakeListFragment extends ListFragment implements DownloadEart
     @Override
     public void onResume() {
         super.onResume();
+
+        // oBTENER LA magnitud minima
+
+        int minMag = Integer.parseInt(prefs.getString(getString(R.string.PREF_MIN_MAG), "0"));
+
+        earthQuakes.clear();
+        earthQuakes.addAll(earthQuakeDB.getAllByMagnitude(minMag));
+
+        aa.notifyDataSetChanged();
+
+        // hacer la query
+        // Limpiar el array
+        // Añadir los terremotos al array
+        // Notificar al adaptador
     }
 
     @Override

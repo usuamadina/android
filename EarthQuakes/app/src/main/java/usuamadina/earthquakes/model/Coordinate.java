@@ -18,9 +18,7 @@ public class Coordinate {
         return lat;
     }
 
-    public void setLat(double lat) {
-        this.lat = lat;
-    }
+    public void setLat(double lat) { this.lat = lat;}
 
     public double getLng() {
         return lng;

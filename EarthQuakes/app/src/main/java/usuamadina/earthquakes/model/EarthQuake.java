@@ -21,7 +21,15 @@ public class EarthQuake {
 
     private String url;
 
+    private Double longitude;
+
+    private Double latitude;
+
+    private Double depth;
+
     public EarthQuake(String _id, String place, Date date, Coordinate coords, double magnitude) {
+        this();
+
         this._id = _id;
         this.place = place;
         this.time = date;
@@ -30,6 +38,7 @@ public class EarthQuake {
     }
 
     public EarthQuake() {
+        this.coords = new Coordinate(0.0, 0.0, 0.0);
     }
 
     public String getUrl() {
@@ -83,22 +92,31 @@ public class EarthQuake {
         this.time = date;
     }
 
-    public Coordinate getCoords() {
-        return coords;
-    }
+    public Coordinate getCoords() {return coords;}
 
     public void setCoords(Coordinate coords) {
         this.coords = coords;
     }
 
-    public double getMagnitude() {
-        return magnitude;
-    }
+  //  public getLatitude(){return this.coords.getLat();}
+
+    public void setLatitude(double latitude) {this.coords.setLat(latitude);}
+
+    public void setLongitude(Double longitude){this.coords.setLng(longitude);}
+
+  //  public void getLongitude(){return coords.getLng();}
+
+    public void setDepth(Double depth){ this.coords.setDepth(depth);}
+
+  //  public void getDepth(){return coords.getDepth();}
+
+    public double getMagnitude() { return magnitude;}
 
     public void setMagnitude(double magnitude) {
         this.magnitude = magnitude;
     }
 
     public void insertEarthQuake(EarthQuake earthQuake) {
+
     }
 }
