@@ -1,11 +1,8 @@
-package usuamadina.earthquakes.Tasks;
+package usuamadina.earthquakes.services;
 
-import android.content.ContentValues;
-import android.content.Context;
+import android.app.Service;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
+import android.os.IBinder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,73 +11,44 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import usuamadina.earthquakes.R;
 import usuamadina.earthquakes.database.EarthQuakeDB;
-import usuamadina.earthquakes.model.EarthQuake;
 import usuamadina.earthquakes.model.Coordinate;
+import usuamadina.earthquakes.model.EarthQuake;
 
-/**
- * Created by cursomovil on 25/03/15.
- */
-public class DownloadEarthQuakesTask extends AsyncTask<String, EarthQuake, Integer> {
+public class DownloadEarthQuakeService extends Service {
 
     private EarthQuakeDB earthQuakeDB;
-    private Cursor cursor;
-    private ContentValues newValues = new ContentValues();
-    private String[] resultColumns;
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
 
-    // De esta forma obligamos a quien quiera usar el AsynTask a ejecutar el método AddEarthQuakeInterface exigiéndole
-    //que nos pase algo de tipo AddEarthQuakeInterface y que implemente el método addEarthQuake
-
-    private final String EARTHQUAKE = "EARTHQUAKE";
-    //Una interfaz es un tipo de datos, así que nos vale para declarar una variable con ese tipo de datos
-    private AddEarthQuakeInterface target;
-
-    //No podemos poner un tipo de datos concreto porque no sabemos quien va a llamar a este método, pero si sabemos que va a
-    //ejecutar este método
-
-
-
-    public DownloadEarthQuakesTask(Context context, AddEarthQuakeInterface target) {
-
-        this.target = target;
-
-        earthQuakeDB = new EarthQuakeDB(context);
-
+        earthQuakeDB = new EarthQuakeDB(this);
     }
 
     @Override
-    protected Integer doInBackground(String... urls) {
-        int count = 0;
+    public int onStartCommand(Intent intent, int flags, int startId) {
 
-        if (urls.length > 0) {
-            count = updateEarthQuakes(urls[0]);
-        }
+        return super.onStartCommand(intent, flags, startId);
 
-        return count;
+        Thread t = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                updateEarthQuakes(getString(R.string.earthquakes_url));
+            }
+        });
+
+        t.start();
+
+        return Service.START_STICKY;
     }
 
-    @Override
-    protected void onProgressUpdate(EarthQuake... earthQuakes) {
-        super.onProgressUpdate(earthQuakes);
-
-
-    }
-
-    @Override
-    protected void onPostExecute(Integer count) {
-        super.onPostExecute(count);
-
-        target.notifyTotal(count);
-
-
-    }
 
     private int updateEarthQuakes(String earthquakesFeed) {
 
@@ -158,10 +126,8 @@ public class DownloadEarthQuakesTask extends AsyncTask<String, EarthQuake, Integ
     }
 
 
-    public interface AddEarthQuakeInterface {
-
-        public void notifyTotal(int total);
+    @Override
+    public IBinder onBind(Intent intent) {
+       return null;
     }
-
-
 }

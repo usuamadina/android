@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import usuamadina.earthquakes.R;
 import usuamadina.earthquakes.Tasks.DownloadEarthQuakesTask;
+import usuamadina.earthquakes.services.DownloadEarthQuakeService;
 
 
 public class MainActivity extends ActionBarActivity implements DownloadEarthQuakesTask.AddEarthQuakeInterface{
@@ -60,10 +61,15 @@ public class MainActivity extends ActionBarActivity implements DownloadEarthQuak
 
     private void downloadEarthQuakes() {
 
-        DownloadEarthQuakesTask task = new DownloadEarthQuakesTask(this,this); // De esta forma le pasamos el contexto
-        task.execute(getString(R.string.earthquakes_url)); //crea un nuevo thread y ejecuta el método doInBackground dentro del thread
+       /* DownloadEarthQuakesTask task = new DownloadEarthQuakesTask(this,this); // De esta forma le pasamos el contexto
+        task.execute(getString(R.string.earthquakes_url)); //crea un nuevo thread y ejecuta el método doInBackground dentro del thread*/
+
+        Intent download = new Intent(this, DownloadEarthQuakeService.class);
+        startService(download);
 
     }
+
+
 
     @Override
     public void notifyTotal(int total) {
