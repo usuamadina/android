@@ -35,7 +35,9 @@ public class DownloadEarthQuakeService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        return super.onStartCommand(intent, flags, startId);
+        super.onStartCommand(intent, flags, startId);
+
+
 
         Thread t = new Thread(new Runnable(){
             @Override
