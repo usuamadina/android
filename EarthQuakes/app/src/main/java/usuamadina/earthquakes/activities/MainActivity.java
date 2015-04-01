@@ -1,6 +1,7 @@
 package usuamadina.earthquakes.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,19 +9,22 @@ import android.view.MenuItem;
 
 import usuamadina.earthquakes.R;
 import usuamadina.earthquakes.Tasks.DownloadEarthQuakesTask;
+import usuamadina.earthquakes.managers.EarthQuakeAlarmManager;
 import usuamadina.earthquakes.services.DownloadEarthQuakeService;
 
 
 public class MainActivity extends ActionBarActivity implements DownloadEarthQuakesTask.AddEarthQuakeInterface{
 
     private final int PREFS_ACTIVITY = 1;
+    private final String EARTHQUAKE_PREFS = "EARTHQUAKES_PREFS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        checkToSetAlarm();
 
-        downloadEarthQuakes();
+       // downloadEarthQuakes();
 
     }
 
@@ -50,7 +54,6 @@ public class MainActivity extends ActionBarActivity implements DownloadEarthQuak
             Intent prefsIntent = new Intent(this, SettingsActivity.class);
             startActivityForResult(prefsIntent,PREFS_ACTIVITY);
 
-
             return true;
         }
 
@@ -59,17 +62,32 @@ public class MainActivity extends ActionBarActivity implements DownloadEarthQuak
 
     }
 
+    /*
+
     private void downloadEarthQuakes() {
 
        /* DownloadEarthQuakesTask task = new DownloadEarthQuakesTask(this,this); // De esta forma le pasamos el contexto
-        task.execute(getString(R.string.earthquakes_url)); //crea un nuevo thread y ejecuta el método doInBackground dentro del thread*/
+        task.execute(getString(R.string.earthquakes_url)); //crea un nuevo thread y ejecuta el método doInBackground dentro del thread
 
         Intent download = new Intent(this, DownloadEarthQuakeService.class);
         startService(download);
 
+    }*/
+
+    private void checkToSetAlarm(){
+
+        String KEY ="LAUNCHED_BEFORE";
+
+        SharedPreferences prefs = getSharedPreferences(EARTHQUAKE_PREFS,MODE_PRIVATE);
+        if (!prefs.getBoolean(KEY,false)){
+            long interval = getResources().getInteger(R.integer.default_interval);
+            EarthQuakeAlarmManager.activateAlarm(this,interval);
+
+            prefs.edit().putBoolean("LAUNCHED_BEFORE",true).apply();
+        }
+
+
     }
-
-
 
     @Override
     public void notifyTotal(int total) {
