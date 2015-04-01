@@ -3,6 +3,7 @@ package usuamadina.earthquakes.services;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,14 +31,14 @@ public class DownloadEarthQuakeService extends Service {
         super.onCreate();
 
         earthQuakeDB = new EarthQuakeDB(this);
+
+        Log.d("EARTHQUAKE", "Servicio descargas iniciado");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         super.onStartCommand(intent, flags, startId);
-
-
 
         Thread t = new Thread(new Runnable(){
             @Override
