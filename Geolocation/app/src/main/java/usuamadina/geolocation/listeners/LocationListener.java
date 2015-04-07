@@ -15,7 +15,7 @@ public class LocationListener implements android.location.LocationListener {
     private AddLocationInterface target;
 
     public LocationListener(AddLocationInterface target){
-        this.target;
+        target = this.target;
     }
 
     @Override

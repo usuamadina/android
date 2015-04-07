@@ -12,11 +12,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+
 import usuamadina.geolocation.listeners.LocationListener;
 
 
-public class MainActivity extends ActionBarActivity implements LocationListener.AddLocationInterface{
+public class MainActivity extends ActionBarActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener{
 
+    private Boolean conectado;
     private TextView lblLatitude;
     private TextView lblLongitude;
     private TextView lblAltitude;
@@ -54,6 +58,8 @@ public class MainActivity extends ActionBarActivity implements LocationListener.
 
         provider = locationManager.getBestProvider(criteria, true);
 
+
+
         Log.d("GEO", provider);
 
 
@@ -81,6 +87,27 @@ public class MainActivity extends ActionBarActivity implements LocationListener.
         lblLongitude.setText(String.valueOf(location.getLongitude()));
         lblAltitude.setText(String.valueOf(location.getLatitude()));
         lblSpeed.setText(String.valueOf(location.getSpeed()));
+
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
 
     }
 }
