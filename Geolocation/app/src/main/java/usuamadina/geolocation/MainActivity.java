@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 
 import usuamadina.geolocation.listeners.LocationListener;
 
@@ -26,6 +27,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
     private TextView lblAltitude;
     private TextView lblSpeed;
 
+
     private String provider;
     LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -36,15 +38,27 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+
         lblLatitude = (TextView) findViewById(R.id.lblLatitude);
         lblLongitude = (TextView) findViewById(R.id.lblLongitude);
         lblAltitude = (TextView) findViewById(R.id.lblAltitude);
         lblSpeed = (TextView) findViewById(R.id.lblSpeed);
 
+        buildGoogleApiClient();
         getLocationProvider();
         listenLocationChanges();
 
 
+    }
+
+    protected synchronized void buildGoogleApiClient() {
+        GoogleApiClient mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
     }
 
 
@@ -71,9 +85,9 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
         int t = 5000;
         int distance = 5;
 
-        LocationListener listener = new usuamadina.geolocation.listeners.LocationListener(this);
+       /* LocationListener listener = new usuamadina.geolocation.listeners.LocationListener(this);
 
-        locationManager.requestLocationUpdates(provider, t, distance,listener);
+        locationManager.requestLocationUpdates(provider, t, distance,listener);*/
 
 
 
