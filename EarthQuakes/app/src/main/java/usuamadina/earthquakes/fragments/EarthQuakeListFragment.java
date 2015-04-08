@@ -13,9 +13,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import usuamadina.earthquakes.activities.MapsActivity;
 import usuamadina.earthquakes.activities.detail_activity;
 import usuamadina.earthquakes.database.EarthQuakeDB;
 import usuamadina.earthquakes.model.EarthQuake;
@@ -39,6 +44,7 @@ public class EarthQuakeListFragment extends ListFragment implements DownloadEart
     private EarthQuakeDB earthQuakeDB;
 
     private List<EarthQuake> earthQuakes;
+
 
 
     @Override
@@ -99,10 +105,20 @@ public class EarthQuakeListFragment extends ListFragment implements DownloadEart
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
+
+
         EarthQuake earthQuake = earthQuakes.get(position);
 
+        MarkerOptions marker = new MarkerOptions()
+                .position(new LatLng(earthQuake.getCoords().getLat(),earthQuake.getCoords().getLat())).title("Marker");
 
-        Intent detailIntent = new Intent(getActivity(), detail_activity.class);
+
+
+
+
+
+
+        Intent detailIntent = new Intent(getActivity(), MapsActivity.class);
         detailIntent.putExtra(EARTHQUAKE_ID, earthQuake.getId());
         startActivity(detailIntent);
 

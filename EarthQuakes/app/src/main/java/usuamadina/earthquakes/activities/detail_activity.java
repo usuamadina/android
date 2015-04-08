@@ -15,12 +15,14 @@ import android.widget.TextView;
 
 import usuamadina.earthquakes.R;
 import usuamadina.earthquakes.fragments.EarthQuakeListFragment;
+import usuamadina.earthquakes.model.Coordinate;
 import usuamadina.earthquakes.model.EarthQuake;
 
 public class detail_activity extends ActionBarActivity {
 
     public static final String EARTHQUAKE_ITEM = "EARTHQUAKE_ITEM";
     private TextView txtId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class detail_activity extends ActionBarActivity {
         // lo usamos cuando el objeto no es nativo de android, en este caso es un String y si lo es
         Intent detailIntent = getIntent();
         txtId.setText(detailIntent.getStringExtra(EarthQuakeListFragment.EARTHQUAKE_ID));
+
 
 
     }
