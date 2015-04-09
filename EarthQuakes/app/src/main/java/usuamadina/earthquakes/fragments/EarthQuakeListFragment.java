@@ -35,6 +35,8 @@ import usuamadina.earthquakes.Tasks.DownloadEarthQuakesTask;
 public class EarthQuakeListFragment extends ListFragment implements DownloadEarthQuakesTask.AddEarthQuakeInterface {
 
     public static final String EARTHQUAKE_ID = "ID";
+    public static final String EARTHQUAKE_LONG = "LONG";
+    public static final String EARTHQUAKE_LAT = "LAT";
     private static final String EARTHQUAKE = "EARTHQUAKE";
    // private ArrayList<EarthQuake> earthQuakes;
 
@@ -109,17 +111,11 @@ public class EarthQuakeListFragment extends ListFragment implements DownloadEart
 
         EarthQuake earthQuake = earthQuakes.get(position);
 
-        MarkerOptions marker = new MarkerOptions()
-                .position(new LatLng(earthQuake.getCoords().getLat(),earthQuake.getCoords().getLat())).title("Marker");
-
-
-
-
-
-
 
         Intent detailIntent = new Intent(getActivity(), MapsActivity.class);
-        detailIntent.putExtra(EARTHQUAKE_ID, earthQuake.getId());
+
+        detailIntent.putExtra(EARTHQUAKE_ID,earthQuake.getId());
+
         startActivity(detailIntent);
 
 

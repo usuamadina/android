@@ -54,6 +54,7 @@ public class EarthQuakeDB {
         return query(null, null);
     }
 
+
     public List<EarthQuake> getAllByMagnitude(int magnitude) {
         String where = KEY_MAGNITUDE + " >= ?";
         String[] whereArgs = {
@@ -61,6 +62,18 @@ public class EarthQuakeDB {
         };
 
         return query(where, whereArgs);
+    }
+
+    public EarthQuake getById(String id) {
+        String where = KEY_ID + " = ?";
+        String[] whereArgs = {id};
+
+        List<EarthQuake> earthQuakes = query(where, whereArgs);
+        if (earthQuakes.size() > 0) {
+            return earthQuakes.get(0);
+        }
+
+        return null;
     }
 
 
@@ -112,7 +125,7 @@ public class EarthQuakeDB {
         newValues.put(KEY_PLACE, earthQuake.getPlace());
         newValues.put(KEY_LOCATION_LAT, earthQuake.getCoords().getLat());
         newValues.put(KEY_LOCATION_LNG, earthQuake.getCoords().getLng());
-        newValues.put(KEY_DEPTH,earthQuake.getCoords().getDepth());
+        newValues.put(KEY_DEPTH, earthQuake.getCoords().getDepth());
         newValues.put(KEY_MAGNITUDE, earthQuake.getMagnitude());
         newValues.put(KEY_LINK, earthQuake.getUrl());
 
@@ -135,15 +148,14 @@ public class EarthQuakeDB {
         private static final int DATABASE_VERSION = 1;
 
 
-        private static final String DATABASE_CREATE = "CREATE TABLE " + DATABASE_TABLE + "(" + KEY_ID +" TEXT PRIMARY KEY," +
-                      KEY_PLACE + " TEXT," +
-                      KEY_MAGNITUDE +  " REAL," +
-                      KEY_LOCATION_LAT + " REAL," +
-                      KEY_LOCATION_LNG + " REAL," +
-                      KEY_DEPTH + " REAL," +
-                      KEY_LINK + " TEXT," +
-                      KEY_DATE + " INTEGER)";
-
+        private static final String DATABASE_CREATE = "CREATE TABLE " + DATABASE_TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," +
+                KEY_PLACE + " TEXT," +
+                KEY_MAGNITUDE + " REAL," +
+                KEY_LOCATION_LAT + " REAL," +
+                KEY_LOCATION_LNG + " REAL," +
+                KEY_DEPTH + " REAL," +
+                KEY_LINK + " TEXT," +
+                KEY_DATE + " INTEGER)";
 
 
         public EarthQuakeOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {

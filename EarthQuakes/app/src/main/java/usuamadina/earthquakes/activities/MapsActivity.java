@@ -3,6 +3,7 @@ package usuamadina.earthquakes.activities;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -11,29 +12,45 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import usuamadina.earthquakes.R;
+import usuamadina.earthquakes.database.EarthQuakeDB;
 import usuamadina.earthquakes.fragments.EarthQuakeListFragment;
 import usuamadina.earthquakes.model.Coordinate;
+import usuamadina.earthquakes.model.EarthQuake;
+
+import static usuamadina.earthquakes.fragments.EarthQuakeListFragment.*;
 
 public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     private String id;
+    private Double longitude;
+    private Double latitude;
+
+    private EarthQuake earthQuake;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
         //recoger el id que me estan pasando por la intent
         Intent detailIntent = getIntent();
+
         id = detailIntent.getStringExtra(EarthQuakeListFragment.EARTHQUAKE_ID);
 
-
-
-
+      // longitude = Double.valueOf(detailIntent.getStringExtra(EarthQuakeListFragment.EARTHQUAKE_LONG));
+      // latitude = Double.valueOf(detailIntent.getStringExtra(EarthQuakeListFragment.EARTHQUAKE_LAT));
 
 
 
         //coger los datos del terremoto
+        EarthQuakeDB earthQuakeDB = new EarthQuakeDB(this);
+        earthQuake = earthQuakeDB.getById(id);
+
+
+
+
+
         setUpMapIfNeeded();
     }
 
@@ -78,8 +95,14 @@ public class MapsActivity extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        //usar los datos del terremoto para rellenar el marker
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        String S;
+
+        MarkerOptions marker = new MarkerOptions()
+                .position(new LatLng(earthQuake.getCoords().getLng(),earthQuake.getCoords().getLat())).title("Marker");
+
+                //usar los datos del terremoto para rellenar el marker
+         mMap.addMarker(marker);
+
         //centrar el mapa en ese punto
     }
 }
