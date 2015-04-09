@@ -31,14 +31,21 @@ public class detail_activity extends ActionBarActivity {
         setContentView(R.layout.each_earthquake_detail);
         txtId = (TextView) findViewById(R.id.txtId);
 
+
         //recibimos el intent y extraemos el id mediante getStringExtra, el get parcelable del ToDoList
         // lo usamos cuando el objeto no es nativo de android, en este caso es un String y si lo es
         Intent detailIntent = getIntent();
         txtId.setText(detailIntent.getStringExtra(EarthQuakeListFragment.EARTHQUAKE_ID));
 
-
+        //
 
     }
+
+    /*
+    * private void showMap(EarthQuake earthQuake){
+    *  List <EarthQuake> earthQuakes = new ArrayList()
+    *  }
+    * */
 
 
 }
