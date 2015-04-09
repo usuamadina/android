@@ -5,9 +5,12 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -46,9 +49,6 @@ public class MapsActivity extends FragmentActivity {
         //coger los datos del terremoto
         EarthQuakeDB earthQuakeDB = new EarthQuakeDB(this);
         earthQuake = earthQuakeDB.getById(id);
-
-
-
 
 
         setUpMapIfNeeded();
@@ -96,12 +96,22 @@ public class MapsActivity extends FragmentActivity {
      */
     private void setUpMap() {
         String S;
+        S = String.valueOf((earthQuake.getMagnitude()));
 
         MarkerOptions marker = new MarkerOptions()
-                .position(new LatLng(earthQuake.getCoords().getLng(),earthQuake.getCoords().getLat())).title("Marker");
+                .position(new LatLng(earthQuake.getCoords().getLng(),earthQuake.getCoords().getLat())).title(S);
 
                 //usar los datos del terremoto para rellenar el marker
          mMap.addMarker(marker);
+
+        LatLng punto = new LatLng(earthQuake.getCoords().getLng(),earthQuake.getCoords().getLat());
+
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(punto)
+                .zoom(5)
+                .build();
+        CameraUpdate camUpd =CameraUpdateFactory.newCameraPosition(cameraPosition);
+        mMap.animateCamera(camUpd);
+
 
         //centrar el mapa en ese punto
     }
