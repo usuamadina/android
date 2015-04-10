@@ -8,11 +8,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
-    <fragment
-        android:id="@+id/list_fragment"
-        android:name="usuamadina.earthquakes.fragments.EarthQuakeListFragment"
+
+    <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
+        android:id="@+id/fLayout"></FrameLayout>
 </RelativeLayout>

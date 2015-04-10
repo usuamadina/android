@@ -1,22 +1,35 @@
 package usuamadina.earthquakes.activities;
 
+
+
+
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.ActionBarActivity;
+
+
+
 import android.os.Bundle;
+
+
 import android.view.Menu;
 import android.view.MenuItem;
 
 import usuamadina.earthquakes.R;
 import usuamadina.earthquakes.Tasks.DownloadEarthQuakesTask;
+import usuamadina.earthquakes.fragments.EarthQuakeListFragment;
+import usuamadina.earthquakes.fragments.EarthQuakesMapFragment;
 import usuamadina.earthquakes.managers.EarthQuakeAlarmManager;
 import usuamadina.earthquakes.services.DownloadEarthQuakeService;
 
 
-public class MainActivity extends ActionBarActivity implements DownloadEarthQuakesTask.AddEarthQuakeInterface{
+public class MainActivity extends Activity implements DownloadEarthQuakesTask.AddEarthQuakeInterface {
 
     private final int PREFS_ACTIVITY = 1;
     private final String EARTHQUAKE_PREFS = "EARTHQUAKES_PREFS";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +37,29 @@ public class MainActivity extends ActionBarActivity implements DownloadEarthQuak
         setContentView(R.layout.activity_main);
         checkToSetAlarm();
 
-       // downloadEarthQuakes();
+       ActionBar actionBar = getActionBar();
+       actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        ActionBar.Tab tabOne = actionBar.newTab();
+        tabOne.setText("List")
+                .setTabListener(
+
+                        new TabListener<EarthQuakeListFragment>
+                                (this, R.id.fLayout, EarthQuakeListFragment.class));
+
+        actionBar.addTab(tabOne);
+
+        ActionBar.Tab tabTwo = actionBar.newTab();
+        tabTwo.setText("Map")
+                .setTabListener( new TabListener<EarthQuakesMapFragment>(this,R.id.fLayout,EarthQuakesMapFragment.class));
+
+        actionBar.addTab(tabTwo);
+
+
+
+
+
+        // downloadEarthQuakes();
 
     }
 
