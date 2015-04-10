@@ -1,6 +1,5 @@
 package usuamadina.earthquakes.fragments;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,15 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import usuamadina.earthquakes.activities.MapsActivity;
-import usuamadina.earthquakes.activities.detail_activity;
+import usuamadina.earthquakes.activities.DetailActivity;
 import usuamadina.earthquakes.database.EarthQuakeDB;
 import usuamadina.earthquakes.model.EarthQuake;
 import usuamadina.earthquakes.EarthQuakeAdapter.EarthQuakeAdapter;
@@ -63,9 +57,7 @@ public class EarthQuakeListFragment extends ListFragment implements DownloadEart
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = super.onCreateView(inflater, container, savedInstanceState);
 
-        aa = new EarthQuakeAdapter(getActivity(), R.layout.earthquake_detail, earthQuakes);
-
-
+        aa = new EarthQuakeAdapter(getActivity(), R.layout.earthquake_list_row, earthQuakes);
 
         setListAdapter(aa);
 
@@ -112,7 +104,7 @@ public class EarthQuakeListFragment extends ListFragment implements DownloadEart
         EarthQuake earthQuake = earthQuakes.get(position);
 
 
-        Intent detailIntent = new Intent(getActivity(), MapsActivity.class);
+        Intent detailIntent = new Intent(getActivity(), DetailActivity.class);
 
         detailIntent.putExtra(EARTHQUAKE_ID,earthQuake.getId());
 

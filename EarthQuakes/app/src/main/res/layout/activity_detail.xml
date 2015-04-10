@@ -21,4 +21,11 @@
 
     </LinearLayout>
 
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="usuamadina.earthquakes.fragments.EarthQuakesMapFragment"
+        android:id="@+id/map_fragment"
+        android:layout_weight="1" />
+
 </LinearLayout>

@@ -9,7 +9,7 @@
     tools:context=".MainActivity">
 
     <fragment
-        android:id="@+id/fragment"
+        android:id="@+id/list_fragment"
         android:name="usuamadina.earthquakes.fragments.EarthQuakeListFragment"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

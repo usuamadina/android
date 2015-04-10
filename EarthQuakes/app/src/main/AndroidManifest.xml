@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.detail_activity"
+            android:name=".activities.DetailActivity"
             android:label="DetailActivity"
             android:parentActivityName=".activities.MainActivity" >
             <meta-data

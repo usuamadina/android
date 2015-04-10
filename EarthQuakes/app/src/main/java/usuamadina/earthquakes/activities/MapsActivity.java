@@ -44,9 +44,8 @@ public class MapsActivity extends FragmentActivity {
       // longitude = Double.valueOf(detailIntent.getStringExtra(EarthQuakeListFragment.EARTHQUAKE_LONG));
       // latitude = Double.valueOf(detailIntent.getStringExtra(EarthQuakeListFragment.EARTHQUAKE_LAT));
 
+        //coger los datos del terremoto de la BD
 
-
-        //coger los datos del terremoto
         EarthQuakeDB earthQuakeDB = new EarthQuakeDB(this);
         earthQuake = earthQuakeDB.getById(id);
 
@@ -98,13 +97,16 @@ public class MapsActivity extends FragmentActivity {
         String S;
         S = String.valueOf((earthQuake.getMagnitude()));
 
+        //usar los datos del terremoto para rellenar el marker
+
         MarkerOptions marker = new MarkerOptions()
                 .position(new LatLng(earthQuake.getCoords().getLng(),earthQuake.getCoords().getLat())).title(S);
 
-                //usar los datos del terremoto para rellenar el marker
-         mMap.addMarker(marker);
+        mMap.addMarker(marker);
 
         LatLng punto = new LatLng(earthQuake.getCoords().getLng(),earthQuake.getCoords().getLat());
+
+        //centrar el mapa en ese punto
 
         CameraPosition cameraPosition = new CameraPosition.Builder().target(punto)
                 .zoom(5)
@@ -113,6 +115,6 @@ public class MapsActivity extends FragmentActivity {
         mMap.animateCamera(camUpd);
 
 
-        //centrar el mapa en ese punto
+
     }
 }
