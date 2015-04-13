@@ -38,12 +38,13 @@ public class DetailActivity extends ActionBarActivity {
 
         //recibimos el intent y extraemos el id mediante getStringExtra, el get parcelable del ToDoList
         // lo usamos cuando el objeto no es nativo de android, en este caso es un String y si lo es
+
         Intent detailIntent = getIntent();
 
         EarthQuakeDB earthQuakeDB = new EarthQuakeDB(this);
         EarthQuake earthQuake = earthQuakeDB.getById(detailIntent.getStringExtra(EarthQuakeListFragment.EARTHQUAKE_ID));
 
-        txtId.setText(detailIntent.getStringExtra(EarthQuakeListFragment.EARTHQUAKE_ID));
+        txtId.setText(earthQuake.getId());
 
         EarthQuakesMapFragment mapFragment = (EarthQuakesMapFragment) getFragmentManager().findFragmentById(R.id.map_fragment);
 

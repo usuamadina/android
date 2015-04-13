@@ -57,23 +57,23 @@ public class EarthQuakesMapFragment extends MapFragment implements GoogleMap.OnM
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 
-        if( earthQuakes.size()>= 1){
+        if( earthQuakes.size() == 1){
 
             Log.d( EARTHQUAKE_LIST, "La lista solo tiene un elemento");
 
-            EarthQuake earthQuake = earthQuakes.get(0);
+            oneEarthQuake = earthQuakes.get(0);
 
             String S;
-            S = String.valueOf((earthQuake.getMagnitude()));
+            S = String.valueOf((oneEarthQuake.getMagnitude()));
 
             //usar los datos del terremoto para rellenar el marker
 
             MarkerOptions marker = new MarkerOptions()
-                    .position(new LatLng(earthQuake.getCoords().getLng(),earthQuake.getCoords().getLat())).title(S);
+                    .position(new LatLng(oneEarthQuake.getCoords().getLng(), oneEarthQuake.getCoords().getLat())).title(S);
 
             map.addMarker(marker);
 
-            LatLng punto = new LatLng(earthQuake.getCoords().getLng(),earthQuake.getCoords().getLat());
+            LatLng punto = new LatLng(oneEarthQuake.getCoords().getLng(), oneEarthQuake.getCoords().getLat());
 
             //centrar el mapa en ese punto
 
@@ -84,7 +84,7 @@ public class EarthQuakesMapFragment extends MapFragment implements GoogleMap.OnM
             map.animateCamera(cameraUpdate);
 
 
-        } else {
+        } else if (earthQuakes.size() > 1) {
 
             for (EarthQuake earthQuake: earthQuakes){
                 String S;
