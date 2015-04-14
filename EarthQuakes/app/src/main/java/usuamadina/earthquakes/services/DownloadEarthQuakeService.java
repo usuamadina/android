@@ -1,7 +1,12 @@
 package usuamadina.earthquakes.services;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.Color;
+import android.media.RingtoneManager;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -18,6 +23,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import usuamadina.earthquakes.R;
+import usuamadina.earthquakes.activities.MainActivity;
 import usuamadina.earthquakes.database.EarthQuakeDB;
 import usuamadina.earthquakes.model.Coordinate;
 import usuamadina.earthquakes.model.EarthQuake;
@@ -91,6 +97,7 @@ public class DownloadEarthQuakeService extends Service {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        sendNofication(count);
         return count;
     }
 
@@ -126,6 +133,31 @@ public class DownloadEarthQuakeService extends Service {
 
 
         }
+    }
+
+    private void sendNofication(int count){
+
+        Intent intentToFire = new Intent(this, MainActivity.class);
+        PendingIntent activityIntent = PendingIntent.getActivity(this,0,intentToFire,0);
+
+        Notification.Builder builder = new Notification.Builder(DownloadEarthQuakeService.this);
+
+        builder.setSmallIcon(R.drawable.ic_launcher)
+                .setContentTitle(getString(R.string.app_name))
+                .setContentText(count + "new EarthQuakes")
+                .setWhen(System.currentTimeMillis())
+                .setDefaults(Notification.DEFAULT_SOUND)
+                .setSound(
+                RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                .setContentIntent(activityIntent)
+                .setLights(Color.MAGENTA,0,1)
+                .setAutoCancel(true);
+
+        Notification notification = builder.getNotification();
+        NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        int NOTIFICATION_REF = 1;
+        notificationManager.notify(NOTIFICATION_REF,notification);
+
     }
 
 

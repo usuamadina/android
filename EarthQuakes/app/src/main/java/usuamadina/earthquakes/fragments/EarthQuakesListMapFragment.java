@@ -1,12 +1,12 @@
-package usuamadina.earthquakes.abstracts;
+package usuamadina.earthquakes.fragments;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -14,6 +14,7 @@ import java.util.List;
 
 import usuamadina.earthquakes.R;
 import usuamadina.earthquakes.database.EarthQuakeDB;
+import usuamadina.earthquakes.fragments.abstracts.AbstractMapFragment;
 import usuamadina.earthquakes.model.EarthQuake;
 
 /**
@@ -31,11 +32,13 @@ public class EarthQuakesListMapFragment extends AbstractMapFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+
     }
 
     @Override
     protected void getData() {
-        int minMag = Integer.parseInt(prefs.getString(R.string.PREF_MIN_MAG));
+        int minMag = Integer.parseInt(prefs.getString("PREF_MIN_MAG","0"));
         earthQuakes = earthQuakeDB.getAllByMagnitude(minMag);
 
     }
@@ -62,7 +65,21 @@ public class EarthQuakesListMapFragment extends AbstractMapFragment {
         }
 
 
+    public static class SettingsFragment extends PreferenceFragment {
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+
+            //Load the preferences from an XML resource
+            addPreferencesFromResource(R.xml.userpreferences);
+
+
+        }
+
 
 
     }
 }
+

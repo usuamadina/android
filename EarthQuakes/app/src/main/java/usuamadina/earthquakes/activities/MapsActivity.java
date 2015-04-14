@@ -3,24 +3,19 @@ package usuamadina.earthquakes.activities;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import usuamadina.earthquakes.R;
+import usuamadina.earthquakes.fragments.EarthQuakeMapFragment;
 import usuamadina.earthquakes.database.EarthQuakeDB;
-import usuamadina.earthquakes.fragments.EarthQuakeListFragment;
-import usuamadina.earthquakes.model.Coordinate;
 import usuamadina.earthquakes.model.EarthQuake;
-
-import static usuamadina.earthquakes.fragments.EarthQuakeListFragment.*;
 
 public class MapsActivity extends FragmentActivity {
 
@@ -39,7 +34,7 @@ public class MapsActivity extends FragmentActivity {
         //recoger el id que me estan pasando por la intent
         Intent detailIntent = getIntent();
 
-        id = detailIntent.getStringExtra(EarthQuakeListFragment.EARTHQUAKE_ID);
+        id = detailIntent.getStringExtra(EarthQuakeMapFragment.EarthQuakeListFragment.EARTHQUAKE_ID);
 
       // longitude = Double.valueOf(detailIntent.getStringExtra(EarthQuakeListFragment.EARTHQUAKE_LONG));
       // latitude = Double.valueOf(detailIntent.getStringExtra(EarthQuakeListFragment.EARTHQUAKE_LAT));

@@ -1,15 +1,12 @@
 package usuamadina.earthquakes.activities;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 
 import usuamadina.earthquakes.R;
-import usuamadina.earthquakes.fragments.SettingsFragment;
+import usuamadina.earthquakes.fragments.EarthQuakesListMapFragment;
 import usuamadina.earthquakes.managers.EarthQuakeAlarmManager;
 
 /**
@@ -32,7 +29,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 
     getFragmentManager()
             .beginTransaction()
-            .replace(android.R.id.content,new SettingsFragment())
+            .replace(android.R.id.content,new EarthQuakesListMapFragment.SettingsFragment())
     .commit();
 
     }

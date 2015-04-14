@@ -5,8 +5,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 
-import usuamadina.earthquakes.fragments.EarthQuakeListFragment;
-
 /**
  * Created by cursomovil on 10/04/15.
  */

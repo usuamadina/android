@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.app.ListFragment;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -22,6 +25,7 @@ import usuamadina.earthquakes.EarthQuakeAdapter.EarthQuakeAdapter;
 import usuamadina.earthquakes.R;
 
 import usuamadina.earthquakes.Tasks.DownloadEarthQuakesTask;
+import usuamadina.earthquakes.services.DownloadEarthQuakeService;
 
 //Hacemos que EarthQuakeListFragment sea del tipo DownloadEarthQuakesTask.AddEarthQuakeInterface mediante el implements
 //pero necesitamos implementar el método addEarthQuakeInterface
@@ -32,7 +36,7 @@ public class EarthQuakeListFragment extends ListFragment implements DownloadEart
     public static final String EARTHQUAKE_LONG = "LONG";
     public static final String EARTHQUAKE_LAT = "LAT";
     private static final String EARTHQUAKE = "EARTHQUAKE";
-   // private ArrayList<EarthQuake> earthQuakes;
+    // private ArrayList<EarthQuake> earthQuakes;
 
     private ArrayAdapter<EarthQuake> aa;
 
@@ -49,8 +53,14 @@ public class EarthQuakeListFragment extends ListFragment implements DownloadEart
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
+
+
         earthQuakeDB = new EarthQuakeDB(getActivity());
         earthQuakes = new ArrayList<>();
+
+        setHasOptionsMenu(true);
+
+
     }
 
     @Override
@@ -113,8 +123,22 @@ public class EarthQuakeListFragment extends ListFragment implements DownloadEart
 
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_refresh,menu);
+    }
 
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if(id == R.id.action_refresh){
+            Intent download = new Intent(getActivity(), DownloadEarthQuakeService.class);
+            getActivity().startService(download);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
-
-

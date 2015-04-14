@@ -19,9 +19,10 @@ import android.view.MenuItem;
 import usuamadina.earthquakes.R;
 import usuamadina.earthquakes.Tasks.DownloadEarthQuakesTask;
 import usuamadina.earthquakes.fragments.EarthQuakeListFragment;
+import usuamadina.earthquakes.fragments.EarthQuakeMapFragment;
 import usuamadina.earthquakes.fragments.EarthQuakesMapFragment;
 import usuamadina.earthquakes.managers.EarthQuakeAlarmManager;
-import usuamadina.earthquakes.services.DownloadEarthQuakeService;
+import usuamadina.earthquakes.fragments.EarthQuakesListMapFragment;
 
 
 public class MainActivity extends Activity implements DownloadEarthQuakesTask.AddEarthQuakeInterface {
@@ -54,9 +55,6 @@ public class MainActivity extends Activity implements DownloadEarthQuakesTask.Ad
                 .setTabListener( new TabListener<EarthQuakesMapFragment>(this,R.id.fLayout,EarthQuakesMapFragment.class));
 
         actionBar.addTab(tabTwo);
-
-
-
 
 
         // downloadEarthQuakes();
@@ -97,6 +95,8 @@ public class MainActivity extends Activity implements DownloadEarthQuakesTask.Ad
 
     }
 
+
+
     /*
 
     private void downloadEarthQuakes() {
@@ -128,4 +128,6 @@ public class MainActivity extends Activity implements DownloadEarthQuakesTask.Ad
     public void notifyTotal(int total) {
 
     }
+
+
 }

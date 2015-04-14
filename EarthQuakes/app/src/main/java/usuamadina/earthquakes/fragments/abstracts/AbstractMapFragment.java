@@ -1,4 +1,4 @@
-package usuamadina.earthquakes.abstracts;
+package usuamadina.earthquakes.fragments.abstracts;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -39,22 +39,12 @@ public abstract class AbstractMapFragment extends MapFragment implements GoogleM
         return layout;
     }
 
-    protected MarkerOptions createMarker (EarthQuake earthQuake){
-        LatLng point = new LatLng(earthQuake.getCoords().getLng(),earthQuake.getCoords().getLat());
-
-        MarkerOptions marker = new MarkerOptions()
-                .position(point)
-                .snippet(earthQuake.getCoords().toString());
-        return marker;
+    @Override
+    public void onResume() {
+        super.onResume();
+        setupMapIfNeeded();
+        map.setOnMapLoadedCallback(this);
     }
-
-
-
-    //Obligamos a los que heredan de esta clase a que implementen los siguientes métodos
-
-    abstract protected void getData(); // No se le ponen las llaves xq no se implementan aquí
-    abstract protected void paintMap();
-
 
     @Override
     public void onMapLoaded() {
@@ -63,6 +53,31 @@ public abstract class AbstractMapFragment extends MapFragment implements GoogleM
         this.paintMap();
 
     }
+
+    protected MarkerOptions createMarker(EarthQuake earthQuake) {
+        LatLng point = new LatLng(earthQuake.getCoords().getLng(), earthQuake.getCoords().getLat());
+
+        MarkerOptions marker = new MarkerOptions()
+                .position(point)
+                .snippet(earthQuake.getCoords().toString());
+        return marker;
+    }
+
+    private void setupMapIfNeeded() {
+        if (map == null) {
+            map = getMap();
+        }
+    }
+
+
+    //Obligamos a los que heredan de esta clase a que implementen los siguientes métodos
+
+    abstract protected void getData(); // No se le ponen las llaves xq no se implementan aquí
+
+    abstract protected void paintMap();
+
+
+
 }
 
 

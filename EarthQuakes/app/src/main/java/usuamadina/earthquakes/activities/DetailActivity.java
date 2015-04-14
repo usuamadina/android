@@ -16,8 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import usuamadina.earthquakes.R;
+import usuamadina.earthquakes.fragments.EarthQuakeMapFragment;
 import usuamadina.earthquakes.database.EarthQuakeDB;
-import usuamadina.earthquakes.fragments.EarthQuakeListFragment;
+import usuamadina.earthquakes.fragments.EarthQuakesListMapFragment;
 import usuamadina.earthquakes.fragments.EarthQuakesMapFragment;
 import usuamadina.earthquakes.model.EarthQuake;
 
@@ -42,20 +43,38 @@ public class DetailActivity extends ActionBarActivity {
         Intent detailIntent = getIntent();
 
         EarthQuakeDB earthQuakeDB = new EarthQuakeDB(this);
-        EarthQuake earthQuake = earthQuakeDB.getById(detailIntent.getStringExtra(EarthQuakeListFragment.EARTHQUAKE_ID));
+        EarthQuake earthQuake = earthQuakeDB.getById(detailIntent.getStringExtra(EarthQuakeMapFragment.EarthQuakeListFragment.EARTHQUAKE_ID));
 
         txtId.setText(earthQuake.getId());
 
-        EarthQuakesMapFragment mapFragment = (EarthQuakesMapFragment) getFragmentManager().findFragmentById(R.id.map_fragment);
+
+        EarthQuakesMapFragment mapFragment = (EarthQuakesMapFragment) getFragmentManager().findFragmentById(R.id.map);
+        EarthQuakesListMapFragment detailFragment = (EarthQuakesListMapFragment)getFragmentManager().findFragmentById(R.id.map_fragment);
+
 
         List<EarthQuake> earthQuakes = new ArrayList<>();
         earthQuakes.add(earthQuake);
 
         mapFragment.setEarthQuakes(earthQuakes);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
-
-
-
 
 
     /*
