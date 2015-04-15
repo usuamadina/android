@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Earthquakes</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="earthquakes_url">http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson</string>
+    <string name="magnitude">Magnitude</string>
+    <string name="details">Details</string>
+    <string name="title_activity_detail">Earthquake Detail</string>
+    <string name="eqId">Earthquake ID:</string>
+
+    <!-- con el %d le decimos que en el texto hay una variable. Podemos ponerle tantas var como queramos-->
+    <string name="num_earthquakes">%d earthquakes processed</string>
+    <string name="little_activity_settings">Settings</string>
+    <string name="esarthquakes_refresh">Earthquakes refresh</string>
+    <string name="esarthquakes_filter">Earthquakes filter</string>
+    <string name="pref_summary_auto_refresh">Auto refresh earthquakes list</string>
+    <string name="pref_title_auto_refresh">Auto refresh</string>
+    <string name="pref_title_auto_refresh_frec">Frequency</string>
+    <string name="pref_summary_auto_refresh_frec">Frequency of the earthquakes list auto refresh</string>
+    <string name="pref_dialog_auto_refresh_frec">Select a frequency</string>
+    <string name="pref_key_auto_refresh">key_auto_refresh</string>
+    <string name="pref_key_auto_refresh_frec">key_auto_refresh_frec</string>
+    <string name="pref_key_min_magnitude">key_min_magnitude</string>
+    <string name="pref_title_min_magnitude">Minimal magnitude</string>
+    <string name="pref_summary_min_magnitude">Filter by minimal frequency</string>
+    <string name="pref_dialog_min_magnitude">Select a magnitude as a minimal</string>
+
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="eqPlace">Place:</string>
+    <string name="eqMag">Magnitude:</string>
+    <string name="eqCoords">Coords:</string>
+    <string name="eqUrl">Link:</string>
+    <string name="eqDate">Date:</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="tabList">LIST</string>
+    <string name="tabMap">MAP</string>
+    <string name="action_refresh">refresh</string>
+    <string name="count_earthquakes" />
+</resources>
